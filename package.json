@@ -1,0 +1,27 @@
+{
+  "name": "beerme",
+  "version": "1.0.0",
+  "description": "a Slack bot to give beer kudos to your friends in your workspace",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clubhouseafterhours/beerme.git"
+  },
+  "keywords": [
+    "slack",
+    "beer",
+    "kudos"
+  ],
+  "author": "Joe Previte and Tad Scritchfield",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clubhouseafterhours/beerme/issues"
+  },
+  "homepage": "https://github.com/clubhouseafterhours/beerme#readme",
+  "dependencies": {
+    "@slack/client": "^4.0.1"
+  }
+}
