@@ -23,5 +23,8 @@
   "homepage": "https://github.com/clubhouseafterhours/beerme#readme",
   "dependencies": {
     "@slack/client": "^4.0.1"
+  },
+  "devDependencies": {
+    "dotenv": "^5.0.1"
   }
 }
