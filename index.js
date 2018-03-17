@@ -1,22 +1,28 @@
 require('dotenv').config();
-const { RTMClient, WebClient } = require('@slack/client');
+import Bot from './bot';
+const { RTMClient } = require('@slack/client');
 const token = process.env.SLACK_BOT_TOKEN;
-const web = new WebClient(token);
 const rtm = new RTMClient(token);
 
 rtm.start();
 
 rtm.on('message', (message) => {
-  if (message.text.includes(':beer:')) {
-    let beerGiverUserId = message.user;
-    let numberOfBeers = message.text.match(/:beer:/g).length;
-    let mentionedUsers = getUsers(message.text);
-    let beerGiver = findUserById(beerGiverUserId);
-    let beerReceivers = mentionedUsers.map((u) => {
-      return findUserById(u)
-    })
-    console.log(`(channel:${message.channel}) ${beerGiver} gave ${numberOfBeers} to ${beerReceivers}!`);
+  if (!message.text.includes(':beer:')) {
+    return;
   }
+  let numberOfUsers = message.text.match(/\<@U\w+>/g).length;
+  if (numberOfUsers === 0) {
+    console.log('no users were given a beer');
+    return;
+  }
+  let beerGiverUserId = message.user;
+  let numberOfBeers = message.text.match(/:beer:/g).length;
+  let mentionedUsers = Bot.getUsers(message.text);
+  let beerGiver = Bot.findUserById(beerGiverUserId);
+  let beerReceivers = mentionedUsers.map((u) => {
+    return Bot.findUserById(u)
+  })
+  console.log(`(channel:${message.channel}) ${beerGiver} gave ${numberOfBeers} to ${beerReceivers}!`);
 
   // Skip messages that are from a bot or my own user ID
   if ((message.subtype && message.subtype === 'bot_message') ||
@@ -27,25 +33,3 @@ rtm.on('message', (message) => {
   // Log the message
   console.log(`(channel:${message.channel}) ${message.user} says: ${message.text}`);
 });
-
-
-function getUsers(text) {
-  let userTags = text.match(/\<@U\w+>/g);
-  return userTags.map((user) => {
-    return user.replace(/[<@>]/g, '');
-  });
-}
-
-function findUserById(id) {
-  let u;
-  web.users.list()
-    .then((res) => {
-      const user = res.members.find(u => u.id === id);
-
-      if (user) {
-        console.log(user.profile.display_name);
-      } else {
-        console.log('no user to give beer to');
-      }
-    });
-}
