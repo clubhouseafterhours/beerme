@@ -7,16 +7,18 @@ const rtm = new RTMClient(token);
 rtm.start();
 
 rtm.on('message', (message) => {
+  // First, check to make sure the message includes the beer emoji.
   if (!message.text.includes(':beer:')) {
     return;
   }
+  // Next, check to make sure the beer was given to at least one person.
   let numberOfUsers = message.text.match(/\<@U\w+>/g).length;
   if (numberOfUsers === 0) {
     console.log('no users were given a beer');
     return;
   }
   let beerGiverUserId = message.user;
-  let numberOfBeers = message.text.match(/:beer:/g).length;
+  let numberOfBeers = (message.text.match(/:beer:/g).length > 1 ? message.text.match(/:beer:/g).length + ' beers' : message.text.match(/:beer:/g).length + ' beer' );
   let mentionedUsers = Bot.getUsers(message.text);
   let beerGiver = Bot.findUserById(beerGiverUserId);
   let beerReceivers = mentionedUsers.map((u) => {
