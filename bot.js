@@ -17,21 +17,41 @@ function getUsers(text) {
 
 function findUserById(id) {
   let u;
-  web.users.list()
+  return web.users.list()
     .then((res) => {
       const user = res.members.find(u => u.id === id);
-
       if (user) {
-        console.log(user.profile.display_name);
+        return user.profile.display_name;
       } else {
-        console.log('no user to give beer to');
+        return 'no user to give beer to';
       }
     });
 }
 
+async function getUserData(user, text, channel) {
+  try {
+    let beerGiverUserId = user;
+    let numberOfBeers = (text.match(/:beer:/g).length > 1 ? text.match(/:beer:/g).length + ' beers' : text.match(/:beer:/g).length + ' beer');
+
+    let mentionedUsersPromise = getUsers(text);
+    let beerGiverPromise = findUserById(beerGiverUserId);
+    
+    let beerReceiversPromise = mentionedUsersPromise.map((u) => {
+      return findUserById(u)
+    });
+
+    const [mentionedUsers, beerGiver] = await Promise.all([mentionedUsersPromise, beerGiverPromise]);
+    const beerReceivers = await Promise.all(beerReceiversPromise);
+    console.log(`(channel:${channel}) ${beerGiver} gave ${numberOfBeers} to ${beerReceivers}!`);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 let Bot = {
   getUsers,
-  findUserById
+  findUserById,
+  getUserData
 }
 
 export default Bot;

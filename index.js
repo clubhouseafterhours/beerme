@@ -7,31 +7,27 @@ const rtm = new RTMClient(token);
 rtm.start();
 
 rtm.on('message', (message) => {
+  let text = message.text;
+  let user = message.user;
+  let channel = message.channel;
   // First, check to make sure the message includes the beer emoji.
-  if (!message.text.includes(':beer:')) {
+  if (!text.includes(':beer:')) {
     return;
   }
+
+  // Skip messages that are from a bot or my own user ID
+  if ((message.subtype && message.subtype === 'bot_message') ||
+    (!message.subtype && user === rtm.activeUserId)) {
+    return;
+  }
+  
   // Next, check to make sure the beer was given to at least one person.
-  let numberOfUsers = message.text.match(/\<@U\w+>/g).length;
+  let numberOfUsers = text.match(/\<@U\w+>/g).length;
   if (numberOfUsers === 0) {
     console.log('no users were given a beer');
     return;
   }
-  let beerGiverUserId = message.user;
-  let numberOfBeers = (message.text.match(/:beer:/g).length > 1 ? message.text.match(/:beer:/g).length + ' beers' : message.text.match(/:beer:/g).length + ' beer' );
-  let mentionedUsers = Bot.getUsers(message.text);
-  let beerGiver = Bot.findUserById(beerGiverUserId);
-  let beerReceivers = mentionedUsers.map((u) => {
-    return Bot.findUserById(u)
-  })
-  console.log(`(channel:${message.channel}) ${beerGiver} gave ${numberOfBeers} to ${beerReceivers}!`);
-
-  // Skip messages that are from a bot or my own user ID
-  if ((message.subtype && message.subtype === 'bot_message') ||
-    (!message.subtype && message.user === rtm.activeUserId)) {
-    return;
-  }
-
-  // Log the message
-  console.log(`(channel:${message.channel}) ${message.user} says: ${message.text}`);
+  
+  Bot.getUserData(user, text, channel);
+ 
 });
