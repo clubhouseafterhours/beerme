@@ -1,6 +1,5 @@
 import Bot from '../bot';
 
-//get user
 describe('Bot', () => {
   describe('getUsers() when user is mentioned in message', () => {
     const userId = 'U8LS2JYG0';
@@ -33,3 +32,8 @@ describe('Bot', () => {
 
   describe('findUserById()', () => {});
 });
+
+//write tests for index.js
+//Test Ideas:
+//1. check to make sure mesage is not undefined (which happens if you only post a link like of a gif).
+//2 check to make there is a user.
