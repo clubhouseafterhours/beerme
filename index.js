@@ -24,9 +24,9 @@ rtm.on('message', message => {
   }
 
   // Next, check to make sure the beer was given to at least one person.
-  let numberOfUsers = text.match(/\<@U\w+>/g).length;
-  if (numberOfUsers === 0) {
-    console.log('no users were given a beer');
+  let numberOfUsers = text.match(/\<@U\w+>/g);
+  if (numberOfUsers === null) {
+    console.log('No users were given a beer');
     return;
   }
 
