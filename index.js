@@ -11,7 +11,7 @@ rtm.on('message', message => {
   let user = message.user;
   let channel = message.channel;
   // First, check to make sure the message includes the beer emoji.
-  if (!text.includes(':beer:')) {
+  if (text === undefined || !text.includes(':beer:')) {
     return;
   }
 
