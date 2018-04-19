@@ -6,7 +6,7 @@ const rtm = new RTMClient(token);
 
 rtm.start();
 
-rtm.on('message', (message) => {
+rtm.on('message', message => {
   let text = message.text;
   let user = message.user;
   let channel = message.channel;
@@ -16,18 +16,19 @@ rtm.on('message', (message) => {
   }
 
   // Skip messages that are from a bot or my own user ID
-  if ((message.subtype && message.subtype === 'bot_message') ||
-    (!message.subtype && user === rtm.activeUserId)) {
+  if (
+    (message.subtype && message.subtype === 'bot_message') ||
+    (!message.subtype && user === rtm.activeUserId)
+  ) {
     return;
   }
-  
+
   // Next, check to make sure the beer was given to at least one person.
   let numberOfUsers = text.match(/\<@U\w+>/g).length;
   if (numberOfUsers === 0) {
     console.log('no users were given a beer');
     return;
   }
-  
+
   Bot.getUserData(user, text, channel);
- 
 });
