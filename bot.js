@@ -40,6 +40,10 @@ function checkBeerReceiverIsNotBeerGiver(beerGiver, beerReceivers) {
   return checkBeerReceiverObject;
 }
 
+function divideBeersUpEvenly(numbersOfBeers, beerReceivers) {
+  //check if it's an even number...
+  //if it is, give one to each person.
+}
 async function getUserData(user, text, channel) {
   try {
     let beerGiverUserId = user;
