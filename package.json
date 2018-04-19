@@ -5,8 +5,7 @@
     "a Slack bot to give beer kudos to your friends in your workspace",
   "main": "index.js",
   "scripts": {
-    "start":
-      "nodemon index.js --exec \"node -r dotenv/config -r babel-register\"",
+    "start": "nodemon index.js --exec \"node -r dotenv/config -r babel-register\"",
     "test": "jest"
   },
   "repository": {
@@ -21,7 +20,8 @@
   },
   "homepage": "https://github.com/clubhouseafterhours/beerme#readme",
   "dependencies": {
-    "@slack/client": "^4.1.0"
+    "@slack/client": "^4.0.1",
+    "mongoose": "^5.0.15"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

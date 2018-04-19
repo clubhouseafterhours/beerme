@@ -1,6 +1,19 @@
 require('dotenv').config();
-import Bot from './bot';
+const mongoose = require('mongoose');
 const { RTMClient } = require('@slack/client');
+import api from './db/api';
+import Bot from './bot';
+
+// DB Connection
+const connectionURI = process.env.NODE_ENV === 'production' ? `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DATABASE}` : process.env.DATABASE
+console.log(connectionURI);
+
+mongoose.connect(connectionURI).catch((error) => {
+  console.log(error);
+});
+
+// Bot
+
 const token = process.env.SLACK_BOT_TOKEN;
 const rtm = new RTMClient(token);
 
@@ -31,4 +44,5 @@ rtm.on('message', message => {
   }
 
   Bot.getUserData(user, text, channel);
+
 });
