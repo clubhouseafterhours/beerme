@@ -1,21 +1,19 @@
 {
   "name": "beerme",
   "version": "1.0.0",
-  "description": "a Slack bot to give beer kudos to your friends in your workspace",
+  "description":
+    "a Slack bot to give beer kudos to your friends in your workspace",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js",
+    "start":
+      "nodemon index.js --exec \"node -r dotenv/config -r babel-register\"",
     "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/clubhouseafterhours/beerme.git"
   },
-  "keywords": [
-    "slack",
-    "beer",
-    "kudos"
-  ],
+  "keywords": ["slack", "beer", "kudos"],
   "author": "Joe Previte and Tad Scritchfield",
   "license": "ISC",
   "bugs": {
@@ -31,6 +29,7 @@
     "babel-preset-es2015": "6.22.0",
     "dotenv": "^5.0.1",
     "jest": "^22.4.3",
-    "jest-cli": "^23.0.0-alpha.6r"
+    "jest-cli": "^23.0.0-alpha.6r",
+    "nodemon": "^1.17.3"
   }
 }
