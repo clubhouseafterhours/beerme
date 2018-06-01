@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 import User from '../models/user';
 
 const Round = new Schema({
-  users: [User],
+  // users: [User],
   created: { type: Date, defaut: Date.now},
   updated: { type: Date, default: Date.now }
 })
