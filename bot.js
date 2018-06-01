@@ -49,9 +49,7 @@ async function getUserData (user, text, channel) {
       return findUserById(u)
     })
 
-    const [beerGiver] = await Promise.all([
-      beerGiverPromise
-    ])
+    const [beerGiver] = await Promise.all([beerGiverPromise])
     const beerReceivers = await Promise.all(beerReceiversPromise)
     const checkBeerReceiverObject = checkBeerReceiverIsNotBeerGiver(
       beerGiver,
@@ -59,7 +57,7 @@ async function getUserData (user, text, channel) {
     )
     if (checkBeerReceiverObject.isNotBeerGiver) {
       console.log(
-        `(channel:${channel})${beerGiver} gave a beer to the following user(s):${beerReceivers}`
+        `(channel:${channel})${beerGiver} gave 1 beer to the following user(s):${beerReceivers}`
       )
     } else {
       console.log(checkBeerReceiverObject.message)

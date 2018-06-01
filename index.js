@@ -5,10 +5,15 @@ const { RTMClient } = require('@slack/client')
 // import api from './db/api'
 
 // DB Connection
-const connectionURI = process.env.NODE_ENV === 'production' ? `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DATABASE}` : process.env.DATABASE
+const connectionURI =
+  process.env.NODE_ENV === 'production'
+    ? `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${
+      process.env.DATABASE
+    }`
+    : process.env.DATABASE
 console.log(connectionURI)
 
-mongoose.connect(connectionURI).catch((error) => {
+mongoose.connect(connectionURI).catch(error => {
   console.log(error)
 })
 
@@ -23,6 +28,7 @@ rtm.on('message', message => {
   let text = message.text
   let user = message.user
   let channel = message.channel
+
   // First, check to make sure the message includes the beer emoji.
   if (text === undefined || !text.includes(':beer:')) {
     return
@@ -42,6 +48,5 @@ rtm.on('message', message => {
     console.log('No users were given a beer')
     return
   }
-
   Bot.getUserData(user, text, channel)
 })
