@@ -1,15 +1,39 @@
 # BeerMe
+A Slack bot that tracks 🍺(kudos) you give to other members of your workspace 🕺🏻💃🏻
 
-## Setup
+## Getting Started
+These instructions will get you a copy of the project up and running on your local machine. 
 
-run `npm i`
+## Prerequisites
+You'll need the following to run the project:
 
-create a local data store for the mongodb database `mkdir -p /data/db`
+```
+node v9.8.0 or higher
+npm v5.6.0 or higher
+mongodb
+```
 
-create .env file `DATABASE`
+- A Slack API token
 
-create .env.production.local to use prod db with `DB_USERNAME`, `DB_PASSWORD`, and `DATABASE`
+*TODO: give instructions on adding your bot to your workspace*
+
+### Setup
+
+- Clone the project then run `npm i`
+
+- Create a local data store for the mongodb database `mkdir -p /data/db`
+
+- Create .env file and add the following:
+  - `SLACK_BOT_TOKEN='put your token here`
+  - `DATABASE=mongodb://localhost/database_name`
+
+- Create .env.production.local to use production db with the following:
+  - `DB_USERNAME` 
+  - `DB_PASSWORD`
+  - `DATABASE`
 
 ## Running
 
-run `npm start`
+To run the project, run `npm start`. You can test if it's working by sending a message with the :beer: emoji in a public channel and tag someone.
+
+Example: `🍺 @jprevite for being awesome`
