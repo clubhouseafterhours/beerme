@@ -1,8 +1,8 @@
+import Bot from './bot'
 require('dotenv').config()
 const mongoose = require('mongoose')
 const { RTMClient } = require('@slack/client')
-import api from './db/api'
-import Bot from './bot'
+// import api from './db/api'
 
 // DB Connection
 const connectionURI = process.env.NODE_ENV === 'production' ? `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DATABASE}` : process.env.DATABASE
