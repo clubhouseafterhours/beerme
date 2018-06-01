@@ -15,11 +15,10 @@ function getUsers (text) {
 }
 
 function findUserById (id) {
-  let u
   return web.users.list().then(res => {
     const user = res.members.find(u => u.id === id)
     if (user) {
-      return user.profile.display_name
+      return ' ' + user.profile.display_name
     } else {
       return 'no user to give beer to'
     }
@@ -47,11 +46,6 @@ function divideBeersUpEvenly (numbersOfBeers, beerReceivers) {
 async function getUserData (user, text, channel) {
   try {
     let beerGiverUserId = user
-    let numberOfBeers =
-      text.match(/:beer:/g).length > 1
-        ? text.match(/:beer:/g).length + ' beers'
-        : text.match(/:beer:/g).length + ' beer'
-
     let mentionedUsersPromise = getUsers(text)
     let beerGiverPromise = findUserById(beerGiverUserId)
 
@@ -59,8 +53,7 @@ async function getUserData (user, text, channel) {
       return findUserById(u)
     })
 
-    const [mentionedUsers, beerGiver] = await Promise.all([
-      mentionedUsersPromise,
+    const [beerGiver] = await Promise.all([
       beerGiverPromise
     ])
     const beerReceivers = await Promise.all(beerReceiversPromise)
@@ -70,7 +63,7 @@ async function getUserData (user, text, channel) {
     )
     if (checkBeerReceiverObject.isNotBeerGiver) {
       console.log(
-        `(channel:${channel}) ${beerGiver} gave ${numberOfBeers} to ${beerReceivers}!`
+        `(channel:${channel}) ${beerGiver} gave a beer to the following user(s):${beerReceivers}`
       )
     } else {
       console.log(checkBeerReceiverObject.message)
