@@ -1,3 +1,4 @@
+import User from './db/models/user'
 require('dotenv').config()
 const { WebClient } = require('@slack/client')
 const token = process.env.SLACK_BOT_TOKEN

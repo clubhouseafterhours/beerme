@@ -7,7 +7,7 @@ const User = new Schema({
   beersInFridge: Number,
   beersReceived: Number,
   saladsReceived: Number,
-  create: { type: Date, defaut: Date.now},
+  create: { type: Date, defaut: Date.now },
   updated: { type: Date, default: Date.now }
 })
 
