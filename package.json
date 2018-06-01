@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js --exec \"node -r dotenv/config -r babel-register\"",
-    "test": "jest"
+    "test": "standard && jest"
   },
   "repository": {
     "type": "git",
