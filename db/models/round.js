@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-import User from '../models/user';
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+import User from '../models/user'
 
 const Round = new Schema({
   // users: [User],
