@@ -43,7 +43,7 @@ rtm.on('message', message => {
   }
 
   // Next, check to make sure the beer was given to at least one person.
-  let numberOfUsers = text.match(/\<@U\w+>/g)
+  let numberOfUsers = text.match(/\<@U\w+>/g) // eslint-disable-line
   if (numberOfUsers === null) {
     console.log('No users were given a beer')
     return

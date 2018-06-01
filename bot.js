@@ -4,7 +4,7 @@ const token = process.env.SLACK_BOT_TOKEN
 const web = new WebClient(token)
 
 function getUsers (text) {
-  let userTags = text.match(/\<@U\w+>/g)
+  let userTags = text.match(/\<@U\w+>/g) // eslint-disable-line
   if (userTags) {
     return userTags.map(user => {
       return user.replace(/[<@>]/g, '')
