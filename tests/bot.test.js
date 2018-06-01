@@ -29,8 +29,6 @@ describe('Bot', () => {
       expect(Bot.getUsers(message)).toEqual(undefined)
     })
   })
-
-  describe('findUserById()', () => {})
 })
 
 // write tests for index.js
