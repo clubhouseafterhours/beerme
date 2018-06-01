@@ -1,8 +1,10 @@
+![build](https://travis-ci.org/clubhouseafterhours/beerme.svg?branch=master)
+
 # BeerMe
 A Slack bot that tracks 🍺(kudos) you give to other members of your workspace 🕺🏻💃🏻
 
 ## Getting Started
-These instructions will get you a copy of the project up and running on your local machine. 
+These instructions will get you a copy of the project up and running on your local machine.
 
 ## Prerequisites
 You'll need the following to run the project:
@@ -28,7 +30,7 @@ mongodb
   - `DATABASE=mongodb://localhost/database_name`
 
 - Create .env.production.local to use production db with the following:
-  - `DB_USERNAME` 
+  - `DB_USERNAME`
   - `DB_PASSWORD`
   - `DATABASE`
 
