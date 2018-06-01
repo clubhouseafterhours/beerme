@@ -35,5 +35,8 @@
     "jest-cli": "^23.0.0-alpha.6r",
     "nodemon": "^1.17.3",
     "standard": "^11.0.1"
+  },
+  "standard": {
+    "env": [ "jest" ]
   }
 }
